@@ -1,7 +1,7 @@
 FROM bioconductor/bioconductor_docker:devel
 
 RUN apt-get update \
-	&& apt-get install -y cargo
+	&& apt-get install -y cargo libtesseract-dev libleptonica-dev libavfilter-dev
 	
 # vignette & vignette building dependencies
 RUN R -e "install.packages(pkgs=c('rmakrdown','tidyverse','magick'),dependencies=TRUE)"
