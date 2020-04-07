@@ -1,7 +1,10 @@
 FROM bioconductor/bioconductor_docker:devel
 
+RUN apt-get update \
+	&& apt-get install -y cargo
+	
 # vignette & vignette building dependencies
-RUN R -e "install.packages(pkgs=c('rmakrdown','tidyverse'),dependencies=TRUE)"
+RUN R -e "install.packages(pkgs=c('rmakrdown','tidyverse','magick'),dependencies=TRUE)"
 RUN R -e "BiocManager::install(pkgs=c('BiocStyle'))"
 # DEWSeq vignette example dependency
 RUN R -e "BiocManager::install(pkgs=c('IHW'))"
