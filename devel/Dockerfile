@@ -14,3 +14,5 @@ RUN R -e "BiocManager::install(pkgs=c('IHW'))"
 # DEWSeq dependencies
 RUN R -e "install.packages('R.utils',dependencies=TRUE)"
 RUN R -e "BiocManager::install(pkgs=c('DESeq2', 'BiocParallel', 'BiocGenerics', 'data.table', 'GenomeInfoDb', 'GenomicRanges', 'S4Vectors', 'SummarizedExperiment'))"
+# BiocCheck
+RUN R -e "BiocManager::install('BiocCheck')"
