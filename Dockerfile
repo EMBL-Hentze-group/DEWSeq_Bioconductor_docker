@@ -1,4 +1,4 @@
-FROM bioconductor/bioconductor_docker:devel
+FROM bioconductor/bioconductor_docker:RELEASE_3_10
 
 RUN apt-get update \
 	&& apt-get install -y cargo libtesseract-dev libleptonica-dev libavfilter-dev \
