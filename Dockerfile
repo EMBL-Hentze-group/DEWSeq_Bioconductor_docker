@@ -1,17 +1,15 @@
-FROM bioconductor/bioconductor_docker:devel
+FROM bioconductor/bioconductor_docker:RELEASE_3_12
 
-RUN apt-get update \
-	&& apt-get install -y cargo libtesseract-dev libleptonica-dev libavfilter-dev \
-	&& apt-get install -y --no-install-recommends texlive texlive-latex-extra \
-	texlive-fonts-extra texlive-bibtex-extra texlive-science texi2html texinfo \
-	&& apt-get clean
+RUN apt-get update && \
+	apt-get install -y --no-install-recommends texlive texi2html texinfo texlive-fonts-extra texlive-latex-extra && \
+	R --slave -e "install.packages(pkgs=c('rmarkdown','tidyverse','magick','R.utils'))" && \
+	R --slave -e "BiocManager::install(pkgs=c('BiocStyle','IHW','DESeq2', 'BiocParallel', 'BiocGenerics', 'data.table', 'GenomeInfoDb', 'GenomicRanges', 'S4Vectors', 'SummarizedExperiment','BiocCheck'))" && \
+	apt-get clean && \
+	apt-get autoremove -y
 	
 # vignette & vignette building dependencies: rmakrdown, tidyverse, magick
 # DEWSeq dependencies: R.utils
-RUN R -e "install.packages(pkgs=c('rmakrdown','tidyverse','magick','R.utils'),dependencies=TRUE)"
 # vignette & vignette building dependencies: BiocStyle
 # DEWSeq vignette example dependency: IHW
 # DEWSeq dependencies: DESeq2, BiocParallel, BiocGenerics, data.table, GenomeInfoDb, GenomicRanges, S4Vectors, SummarizedExperiment
 # Bioconductor build dependency: BiocCheck
-RUN R -e "BiocManager::install(pkgs=c('BiocStyle','IHW','DESeq2', 'BiocParallel', 'BiocGenerics', 'data.table', 'GenomeInfoDb', 'GenomicRanges', 'S4Vectors', 'SummarizedExperiment','BiocCheck'))"
-
