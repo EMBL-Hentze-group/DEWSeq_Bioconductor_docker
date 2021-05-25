@@ -1,4 +1,4 @@
-FROM bioconductor/bioconductor_docker:RELEASE_3_12
+FROM bioconductor/bioconductor_docker:RELEASE_3_13
 
 RUN apt-get update && \
 	apt-get install -y --no-install-recommends texlive texi2html texinfo texlive-fonts-extra texlive-latex-extra && \
