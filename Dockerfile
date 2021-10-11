@@ -7,6 +7,7 @@ RUN apt-get update && \
 	apt-get clean && \
 	apt-get autoremove -y
 	
+# development version
 # vignette & vignette building dependencies: rmakrdown, tidyverse, magick
 # DEWSeq dependencies: R.utils
 # vignette & vignette building dependencies: BiocStyle
